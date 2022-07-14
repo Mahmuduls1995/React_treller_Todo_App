@@ -5,7 +5,7 @@ import TodoCard from './TodoCard';
 import AddCardInputBTN from './AddCardInputBTN';
 import AddListInputBTN from './AddListInputBTN';
 import ListTitleComponent from './ListTitleComponent';
-import { DragDropContext, Droppable,Draggable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 
 export default function NoteBoard() {
@@ -124,83 +124,83 @@ export default function NoteBoard() {
     return (
         <DragDropContext>
             <Droppable>
-            {(provided)=>(
-            <div  ref={provided.innerRef}  {...provided.droppableProps} className='flex gap-x-3 overflow-x-auto h-full pb-20 p-10'>
-                {listas.map((lista, index) => (
-
-                    
+                {(provided) => (
+                    <div ref={provided.innerRef}  {...provided.droppableProps} className='flex gap-x-3 overflow-x-auto h-full pb-20 p-10'>
+                        {listas.map((lista, index) => (
 
 
-                    <div key={index.toString()}>
-
-                        {lista.addanotherlist ? AddAnotherListBTN(index)
-
-                            : <div className='flex flex-col mb-20 bg-zinc-200 p-2 gap-y-2 rounded-md w-[272px] h-fit flex-shrink-0'>
-                                {lista.submittedtitle ?
-                                    <>  
-                                        <ListTitleComponent
-                                        listas={listas} setListas={setListas} setInput={setInput}
-                                        input={input} inputRef={inputRef} handleChange={handleChange}
-                                        title={lista.title} index={index} deleteLista={deleteLista} />
-                                        {/* to-do cards stuff */}
 
 
-                                                 <>
-                                {listas[index].todos.map((todo, indext) => (
-                                    
-                                    <Draggable draggableId='index'>
-                                        {(provided)=>(
-                                            <div  ref={provided.innerRef} {...provided.dragHandleProps}  {...provided.draggableProps}>
-                                            
-                                                <TodoCard key={indext.toString() + todo.toString()}
-                                                    listas={listas} setListas={setListas} todo={todo}
-                                                    setInput={setInput} input={input} inputRef={inputRef}
-                                                    handleChange={handleChange} deleteTodo={deleteTodo}
-                                                    indext={indext} index={index}>
-                                                    
-                                                </TodoCard>
-                                                
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                    
-                                            ))}
-                                        </>
+                            <div key={index.toString()}>
+
+                                {lista.addanotherlist ? AddAnotherListBTN(index)
+
+                                    : <div className='flex flex-col mb-20 bg-zinc-200 p-2 gap-y-2 rounded-md w-[272px] h-fit flex-shrink-0'>
+                                        {lista.submittedtitle ?
+                                            <>
+                                                <ListTitleComponent
+                                                    listas={listas} setListas={setListas} setInput={setInput}
+                                                    input={input} inputRef={inputRef} handleChange={handleChange}
+                                                    title={lista.title} index={index} deleteLista={deleteLista} />
+                                                {/* to-do cards stuff */}
 
 
-                                       
+                                                <>
+                                                    {listas[index].todos.map((todo, indext) => (
+
+                                                        <Draggable draggableId='index'>
+                                                            {(provided) => (
+                                                                <div ref={provided.innerRef} {...provided.dragHandleProps}  {...provided.draggableProps}>
+
+                                                                    <TodoCard key={indext.toString() + todo.toString()}
+                                                                        listas={listas} setListas={setListas} todo={todo}
+                                                                        setInput={setInput} input={input} inputRef={inputRef}
+                                                                        handleChange={handleChange} deleteTodo={deleteTodo}
+                                                                        indext={indext} index={index}>
+
+                                                                    </TodoCard>
+
+                                                                </div>
+                                                            )}
+                                                        </Draggable>
+
+                                                    ))}
+                                                </>
 
 
-                                        {/* add card bottone + input */}
-                                        {listas[index].submittedcardtitle ? AddCardBTN(index) :
-                                            <AddCardInputBTN handleChange={handleChange} addTodo={addTodo} setListas={setListas}
-                                                listas={listas} index={index} input={input} inputRef={inputRef} />}
 
-                                    </>
-                                    :
-                                    <>{/* add list input */}
-                                        <AddListInputBTN
-                                            handleChange={handleChange}
-                                            input={input}
-                                            inputRef={inputRef}
-                                            listas={listas}
-                                            setListas={setListas}
-                                            index={index}
-                                            addList={addList} />
-                                    </>
+
+
+                                                {/* add card bottone + input */}
+                                                {listas[index].submittedcardtitle ? AddCardBTN(index) :
+                                                    <AddCardInputBTN handleChange={handleChange} addTodo={addTodo} setListas={setListas}
+                                                        listas={listas} index={index} input={input} inputRef={inputRef} />}
+
+                                            </>
+                                            :
+                                            <>{/* add list input */}
+                                                <AddListInputBTN
+                                                    handleChange={handleChange}
+                                                    input={input}
+                                                    inputRef={inputRef}
+                                                    listas={listas}
+                                                    setListas={setListas}
+                                                    index={index}
+                                                    addList={addList} />
+                                            </>
+                                        }
+
+                                    </div>
                                 }
-
                             </div>
-                        }
+
+
+
+
+                        ))}
                     </div>
 
-
-
-
-                ))}
-            </div>
-
-            )}
+                )}
 
             </Droppable>
         </DragDropContext>
